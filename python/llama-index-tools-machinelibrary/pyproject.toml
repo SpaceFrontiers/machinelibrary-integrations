@@ -1,0 +1,27 @@
+[project]
+name = "llama-index-tools-machinelibrary"
+version = "0.1.0"
+description = "LlamaIndex tool spec for Machine Library: citable search over papers, books, patents, standards and Wikipedia."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["machinelibrary>=0.1.0,<0.2", "llama-index-core>=0.12,<0.15"]
+keywords = ["llama-index", "tools", "scholarly-search", "citations", "machine-library"]
+
+[project.urls]
+Homepage = "https://machinelibrary.ai"
+Repository = "https://github.com/SpaceFrontiers/machinelibrary-integrations"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["llama_index"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]

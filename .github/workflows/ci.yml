@@ -1,0 +1,36 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: uv venv && uv pip install -e python/machinelibrary -e python/langchain-machinelibrary -e python/llama-index-tools-machinelibrary pytest pytest-asyncio respx ruff langchain
+      - run: .venv/bin/ruff check python && .venv/bin/ruff format --check python
+      - run: |
+          for package in python/*/; do
+            (cd "$package" && "$GITHUB_WORKSPACE/.venv/bin/python" -m pytest -q)
+          done
+  typescript:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: typescript/ai-sdk
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck && npm test && npm run build

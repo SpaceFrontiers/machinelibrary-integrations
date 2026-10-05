@@ -1,0 +1,28 @@
+[project]
+name = "langchain-machinelibrary"
+version = "0.1.0"
+description = "LangChain retriever and tools for Machine Library: citable search over papers, books, patents, standards and Wikipedia."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["machinelibrary>=0.1.0,<0.2", "langchain-core>=0.3,<2"]
+keywords = ["langchain", "retriever", "tool", "scholarly-search", "citations", "machine-library"]
+
+[project.urls]
+Homepage = "https://machinelibrary.ai"
+Repository = "https://github.com/SpaceFrontiers/machinelibrary-integrations"
+Documentation = "https://machinelibrary.ai/docs/api"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

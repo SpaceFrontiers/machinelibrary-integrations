@@ -1,0 +1,50 @@
+{
+  "name": "@machinelibrary/ai-sdk",
+  "version": "0.1.0",
+  "description": "Vercel AI SDK tools for Machine Library: citable search over papers, books, patents, standards and Wikipedia.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "ai-sdk",
+    "vercel-ai",
+    "tools",
+    "rag",
+    "scholarly-search",
+    "citations",
+    "machine-library"
+  ],
+  "homepage": "https://machinelibrary.ai",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "ai": ">=5",
+    "zod": ">=3.25"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "ai": "^7.0.127",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3",
+    "zod": "^4.6.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceFrontiers/machinelibrary-integrations.git",
+    "directory": "typescript/ai-sdk"
+  }
+}
