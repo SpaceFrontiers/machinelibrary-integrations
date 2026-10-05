@@ -27,11 +27,11 @@ for doc in retriever.invoke("perovskite solar cell stability under humidity"):
 
 ```python
 from langchain.agents import create_agent
-from langchain_machinelibrary import machinelibrary_tools
+from langchain_machinelibrary import MachineLibraryToolkit
 
 agent = create_agent(
     "anthropic:claude-sonnet-5-5",
-    tools=machinelibrary_tools(),
+    tools=MachineLibraryToolkit().get_tools(),
     system_prompt="Answer from Machine Library sources and cite each claim's source_uri.",
 )
 agent.invoke({"messages": [{"role": "user", "content": "What limits lithium-metal anodes?"}]})

@@ -1,6 +1,6 @@
 [project]
 name = "langchain-machinelibrary"
-version = "0.1.0"
+version = "0.1.1"
 description = "LangChain retriever and tools for Machine Library: citable search over papers, books, patents, standards and Wikipedia."
 readme = "README.md"
 license = "MIT"

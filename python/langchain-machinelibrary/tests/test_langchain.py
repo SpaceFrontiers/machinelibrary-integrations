@@ -7,6 +7,7 @@ from langchain_machinelibrary import (
     MachineLibraryRetriever,
     MachineLibrarySearch,
     MachineLibrarySearchInDocument,
+    MachineLibraryToolkit,
     machinelibrary_tools,
 )
 
@@ -74,3 +75,8 @@ def test_tool_bundle_exposes_schemas_for_agents():
         "machinelibrary_fetch_document",
     ]
     assert "query" in tools[0].args
+
+
+def test_toolkit_matches_the_tool_bundle():
+    names = [t.name for t in MachineLibraryToolkit(api_key="ml_k").get_tools()]
+    assert names == [t.name for t in machinelibrary_tools(api_key="ml_k")]

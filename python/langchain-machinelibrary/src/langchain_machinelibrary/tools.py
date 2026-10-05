@@ -9,7 +9,7 @@ import json
 from dataclasses import asdict
 from typing import Literal
 
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, BaseToolkit
 from pydantic import BaseModel, Field, SecretStr
 
 from langchain_machinelibrary._clients import async_client, sync_client
@@ -110,11 +110,23 @@ class MachineLibrarySearchInDocument(BaseTool):
         return _json([asdict(p) for p in passages])
 
 
+class MachineLibraryToolkit(BaseToolkit):
+    """Search, find evidence inside a document, and read full text.
+
+    Example:
+        tools = MachineLibraryToolkit().get_tools()
+    """
+
+    api_key: SecretStr | None = None
+
+    def get_tools(self) -> list[BaseTool]:
+        return [
+            MachineLibrarySearch(api_key=self.api_key),
+            MachineLibrarySearchInDocument(api_key=self.api_key),
+            MachineLibraryFetchDocument(api_key=self.api_key),
+        ]
+
+
 def machinelibrary_tools(api_key: str | None = None) -> list[BaseTool]:
     """All three tools, ready for `create_agent(model, tools=...)`."""
-    secret = SecretStr(api_key) if api_key else None
-    return [
-        MachineLibrarySearch(api_key=secret),
-        MachineLibrarySearchInDocument(api_key=secret),
-        MachineLibraryFetchDocument(api_key=secret),
-    ]
+    return MachineLibraryToolkit(api_key=SecretStr(api_key) if api_key else None).get_tools()

@@ -5,6 +5,7 @@ from langchain_machinelibrary.tools import (
     MachineLibraryFetchDocument,
     MachineLibrarySearch,
     MachineLibrarySearchInDocument,
+    MachineLibraryToolkit,
     machinelibrary_tools,
 )
 
@@ -13,5 +14,6 @@ __all__ = [
     "MachineLibraryRetriever",
     "MachineLibrarySearch",
     "MachineLibrarySearchInDocument",
+    "MachineLibraryToolkit",
     "machinelibrary_tools",
 ]
